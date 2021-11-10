@@ -1,0 +1,78 @@
+#include <stdio.h>
+#include <iostream>
+#include <ctime>
+#include <locale>
+using namespace std;
+#define N1 10
+#define N2 10
+
+int find_minus(int A[], int N) {
+	int index_last = 0;
+
+	for (int i = 0; i < N; i++)
+	{
+		if (A[i] < 0)
+		{
+			index_last = i;
+		}
+	}
+	return index_last;
+	cout << index_last << endl;
+}
+
+int max(int n, int a[], int index_last) {
+	int max = a[index_last];
+	for (int i = index_last+1; i < n; i++) {
+		if (a[i] > a[i - 1]) {
+			max = a[i];
+		}
+
+	}
+	return max;
+}
+
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+	srand(time(0));
+	int A[N1], B[N2];
+	int k;
+
+	while (true) {
+		cout << "Выведем случайный массив A\n";
+
+
+		for (int i = 0; i < N1; i++)
+		{
+			A[i] = rand() % 100 - 50;
+			cout << A[i] << "\t";
+		}
+
+		cout << endl << "Выведем случайный массив B\n";
+
+		for (int i = 0; i < N2; i++)
+		{
+			B[i] = rand() % 100 - 50;
+			cout << B[i] << "\t";
+		}
+
+		cout << endl;
+		int index_last1 = find_minus(A, N1);
+		cout << "Выведем номер элемента последнего отрицательного числа массива А:\n"
+			<< index_last1 + 1 << endl;
+		int index_last2 = find_minus(B, N2);
+		cout << "Выведем номер элемента последнего отрицательного числа массива В:\n"
+			<< index_last2 + 1 << endl;
+		cout << "Максимальный элемент: " << max(N1, A, index_last1) << endl;
+
+
+		cout << "Максимальный элемент: " << max(N2, B, index_last2) << endl;
+	
+		cout << "Продолжить выполнение? 0 Если нет, любое число если да:\n";
+		int n;
+		cin >> n;
+		if (n == 0) {
+			break;
+		}
+	}
+}
